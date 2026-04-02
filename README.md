@@ -175,7 +175,7 @@ python train.py \
     --prompt_dim 128 \
     --num_prompt_tokens 10 \
     --prompt_lr 1e-3 \
-    --kano_lr 1e-5 \
+    --backbone_lr 1e-5 \
     --tapt_dropout 0.1 \
     --weight_decay 1e-5
 ```
@@ -204,7 +204,7 @@ python train.py \
     --prompt_dim 128 \
     --num_prompt_tokens 10 \
     --prompt_lr 1e-3 \
-    --kano_lr 1e-5 \
+    --backbone_lr 1e-5 \
     --tapt_dropout 0.1 \
     --weight_decay 1e-5
 ```

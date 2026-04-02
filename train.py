@@ -49,7 +49,7 @@ def print_experiment_info(args, logger):
 
     logger.info(f'Experiment Name: {args.exp_name}')
     logger.info(f'Experiment ID: {args.exp_id}')
-    logger.info(f'Mode: {"TAPT" if args.use_tapt else "Baseline（KANO）"}')
+    logger.info(f'Mode: {"TAPT" if args.use_tapt else "Baseline（Functional Prompt）"}')
     logger.info(f'Step: {args.step}')
 
     logger.info('-' * 80)
@@ -83,9 +83,9 @@ def print_experiment_info(args, logger):
         logger.info(f'  Prompt Dimension: {args.prompt_dim}')
         logger.info(f'  Prompt Tokens: {args.num_prompt_tokens}')
         logger.info(f'  Task ID: {args.task_id}')
-        logger.info(f'  KANO Learning Rate: {args.kano_lr}')
+        logger.info(f'  Backbone Learning Rate: {args.backbone_lr}')
         logger.info(f'  Prompt Learning Rate: {args.prompt_lr}')
-        logger.info(f'  Freeze KANO: {args.freeze_kano}')
+        logger.info(f'  Freeze Encoder: {args.freeze_encoder}')
         logger.info(f'  Injection Layers: {args.prompt_injection_layers}')
         logger.info(f'  TAPT Dropout: {args.tapt_dropout}')
         logger.info(f'  Weight Decay: {args.weight_decay}')
