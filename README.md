@@ -1,6 +1,46 @@
-# TAPT: Knowledge-Aware Prompt Tuning for Molecular Property Prediction
+# TAPT: Task-Adaptive Prompt Tuning for Molecular Property Prediction
 
-**TAPT** is a deep learning framework for molecular property prediction that integrates a knowledge graph-enhanced molecular encoder (KANO) with a **Knowledge-Aware Prompt Tuning (TAPT)** mechanism. By injecting structured chemical knowledge into a graph neural network (CMPNN) via learnable prompts, the model improves generalization across both classification and regression tasks.
+
+---
+
+## Overview
+
+**TAPT** (Task-Adaptive Prompt Tuning) is a minimalist, parameter-efficient fine-tuning
+framework for molecular property prediction built on pre-trained Graph Neural Networks (GNNs).
+
+Unlike prior knowledge-augmented approaches (e.g., KANO) that inject external chemical
+knowledge graphs into prompts, **TAPT operates without any external ontology or chemical
+knowledge base**. Instead, it relies solely on a lightweight, learnable **task identity
+embedding** as the inductive bias for downstream adaptation.
+
+![Architecture Overview](./fig/overview.png)
+
+### Core Mechanism
+
+TAPT introduces a single **cross-attention bottleneck** that functions as a
+*task-specific virtual macro-node*:
+
+1. **Pre-trained Encoding** — A CMPNN encoder pre-trained on ZINC15 via self-supervised
+   objectives produces node-level molecular representations `H ∈ ℝⁿˣᵈ`.
+2. **Task-Adaptive Cross-Attention** — A learnable task identity embedding `pₜ` serves
+   as the query against a near-zero noise input (`σ = 0.01`), producing a globally
+   uniform task context vector `zₜ` that is independent of local molecular substructure.
+3. **Residual Integration** — `zₜ` is broadcast as a uniform residual shift onto every
+   node representation, geometrically shifting the entire molecular point cloud toward
+   the target task manifold without altering pairwise inter-atomic distances.
+
+### Why Not Knowledge Graphs?
+
+Current knowledge-augmented frameworks such as KANO inject element-level ontological
+priors into local message-passing operations. Under data scarcity and scaffold splitting,
+this strategy induces **negative transfer**: local molecular topology acts as topological
+noise, and ontology-driven interventions exacerbate overfitting to spurious training
+substructures.
+
+TAPT's information bottleneck — routing all task conditioning through a single
+low-dimensional global vector — acts as a **structural regularizer** on backbone
+fine-tuning, suppressing representation drift without requiring any chemical database
+or expert annotation.
 
 ![Architecture](./fig/overview.png)
 
@@ -210,7 +250,7 @@ python train.py \
 ## Project Structure
 
 ```
-KAPT-main/
+TAPT-main/
 ├── chemprop/           # Core model and training library
 ├── KGembedding/        # Knowledge graph embedding utilities
 ├── data/               # Benchmark datasets (CSV)

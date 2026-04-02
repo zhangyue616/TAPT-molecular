@@ -6,7 +6,7 @@ from chemprop.train import run_training
 
 
 def setup_logging(args):
-    logger = logging.getLogger('KANO-TAPT')
+    logger = logging.getLogger('TAPT')
     logger.setLevel(logging.DEBUG if not args.quiet else logging.INFO)
 
     console_handler = logging.StreamHandler(sys.stdout)
@@ -27,7 +27,7 @@ def setup_logging(args):
         )
     else:
         formatter = logging.Formatter(
-            '%(asctime)s [KANO] %(levelname)s - %(message)s',
+            '%(asctime)s [BASE] %(levelname)s - %(message)s',
             datefmt='%Y-%m-%d %H:%M:%S'
         )
 
@@ -49,7 +49,7 @@ def print_experiment_info(args, logger):
 
     logger.info(f'Experiment Name: {args.exp_name}')
     logger.info(f'Experiment ID: {args.exp_id}')
-    logger.info(f'Mode: {"TAPT" if args.use_tapt else "KANO"}')
+    logger.info(f'Mode: {"TAPT" if args.use_tapt else "Baseline（KANO）"}')
     logger.info(f'Step: {args.step}')
 
     logger.info('-' * 80)
