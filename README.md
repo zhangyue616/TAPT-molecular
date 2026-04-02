@@ -28,22 +28,6 @@ TAPT introduces a single **cross-attention bottleneck** that functions as a
 3. **Residual Integration** — `zₜ` is broadcast as a uniform residual shift onto every
    node representation, geometrically shifting the entire molecular point cloud toward
    the target task manifold without altering pairwise inter-atomic distances.
-
-### Why Not Knowledge Graphs?
-
-Current knowledge-augmented frameworks such as KANO inject element-level ontological
-priors into local message-passing operations. Under data scarcity and scaffold splitting,
-this strategy induces **negative transfer**: local molecular topology acts as topological
-noise, and ontology-driven interventions exacerbate overfitting to spurious training
-substructures.
-
-TAPT's information bottleneck — routing all task conditioning through a single
-low-dimensional global vector — acts as a **structural regularizer** on backbone
-fine-tuning, suppressing representation drift without requiring any chemical database
-or expert annotation.
-
-![Architecture](./fig/overview.png)
-
 ---
 
 ## Environment Setup
